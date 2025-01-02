@@ -14,13 +14,17 @@ RUN if [ "${REINSTALL_CMAKE_VERSION_FROM_SOURCE}" != "none" ]; then \
     && rm -f /tmp/reinstall-cmake.sh
 
 # spell-checker: disable
+# `add-apt-repository` command is part of package `software-properties-common`
 # devcontainer's cpp is shipped with tools (build-essential cmake, cppcheck, valgrind,
 # clang, lldb, llvm, gdb; vcpkg)
 RUN export DEBIAN_FRONTEND=noninteractive \
-    && apt-get update && apt-get install -y --no-install-recommends \
-       libc++-dev clang-tools clang-format clang-tidy iwyu ccache doxygen graphviz \
-       python3-pip python3-venv pipx \
+    && apt-get update \
+    && apt-get install -y --no-install-recommends \
+       software-properties-common \
+    && apt-get install -y --no-install-recommends \
+       iwyu \
     && apt-get autoremove -y && apt-get clean -y && rm -rf /var/lib/apt/lists/*
 
-USER vscode
-RUN pipx install virtualenv conan
+# Problem working on ...
+#     && add-apt-repository -y 'deb http://apt.llvm.org/noble/   noble-llvm-toolchain-19  main' \
+# clang-tools-19 clang-format-19 clang-tidy-19 libc++-19-dev 

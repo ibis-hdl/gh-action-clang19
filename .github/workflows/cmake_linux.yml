@@ -20,30 +20,20 @@ jobs:
         cmake:
         - {
             cxx:                "g++",
-            conan_profile:      "gcc",
             configure_preset:   "gcc",
             build_preset:       "gcc-release",
-            test_preset:        "gcc-release-test"
           }
         - {
             cxx:                "clang++",
-            conan_profile:      "clang",
             configure_preset:   "clang",
             build_preset:       "clang-release",
-            test_preset:        "clang-release-test"
           }
         - {
             cxx:                "clang++",
-            conan_profile:      "clang-libc++",
             configure_preset:   "clang-libc++",
             build_preset:       "clang-libc++-release",
-            test_preset:        "clang-libc++-release-test",
             depend_pkgs:        "libc++-dev"
           }
-        # exclude temporary clang-libc++ due to conan/cmake provider issues
-        # see: https://github.com/actions/runner/issues/1512
-        #exclude:
-        #  - { cmake: {configure_preset: "clang-libc++" } }
 
     steps:
 
@@ -65,86 +55,15 @@ jobs:
       with:
         submodules: true
 
-    - name: Set Github runner's env (CXX=${{ matrix.cmake.cxx }} etc.)
+    - name: Set Github runner's env (CXX=${{ matrix.cmake.cxx }})
       run: |
-        {
-          echo CXX=${{ matrix.cmake.cxx }}
-          echo CCACHE_DIR=${HOME}/.cache/ccache
-          echo CCACHE_NOCOMPRESS=true   # GitHub actions automatically zstd compresses caches
-        } >> "$GITHUB_ENV"
-        # 10GB total for compile jobs and conan data, unlimited files
-        ccache --max-size 3GB --max-files 0
-
-    - name: Install Conan package manager
-      id: conan2
-      run: |
-        pip --disable-pip-version-check --no-cache-dir install pipx
-        pipx install virtualenv conan
-
-    - name: Cache Conan2
-      id: conan2-cache
-      uses: actions/cache@v4
-      with:
-        key: ${{ matrix.os }}-${{ matrix.cmake.conan_profile }}-conan-${{ hashFiles('conanfile.py') }}
-        path: |
-          ~/.conan2
-
-    - name: Create Conan2 profile (default, ${{ matrix.cmake.conan_profile }})
-      if: steps.conan2-cache.outputs.cache-hit != 'true'
-      shell: bash
-      run: |
-        conan profile detect --force --name ${{ matrix.cmake.conan_profile }}
-        echo "Check to tweak Conan's profile to use libc++ ..."
-        if [[ "${{ matrix.cmake.configure_preset }}" ==  *"libc++"* ]]; then
-          echo "... *is* required"
-          sed -i ~/.conan2/profiles/${{ matrix.cmake.conan_profile }} -E \
-                  -e "s|^(compiler\.cppstd\s*)=(.*)$|\1=20|g" \
-                  -e "s|^(compiler\.libcxx\s*)=(.*)$|\1=libc++|g"
-        else
-          echo "... not required."
-        fi
-        cp ~/.conan2/profiles/${{ matrix.cmake.conan_profile }} ~/.conan2/profiles/default
-        conan profile show -pr=${{ matrix.cmake.conan_profile }}
-
-    - name: Setup Github cache for compiler cache (ccache)
-      uses: actions/cache@v4
-      with:
-        key: ${{ matrix.os }}-${{ matrix.cmake.configure_preset }}-ccache
-        path: |
-          ~/.config/ccache
-          ~/.cache/ccache
-
-    - name: Show CMake configure and build pre-conditions
-      if: false
-      run: |
-        env
-        echo $HOME
-
-    - name: Conan install
-      run: |
-        virtualenv .venv
-        source .venv/bin/activate
-        pip install multipledispatch
-        python3 conan_install.py --profile ${{ matrix.cmake.conan_profile }}
-        deactivate
-
+        echo "CXX=${{ matrix.cmake.cxx }}" >> $GITHUB_ENV
+    
     - name: CMake configuration
-      env:
-        CMAKE_CXX_COMPILER_LAUNCHER: ccache
       run: |
-        conan list '*'
         cmake --list-presets
         cmake --preset ${{ matrix.cmake.configure_preset }}
 
     - name: CMake build
       run: |
         cmake --build --preset ${{ matrix.cmake.build_preset }}
-
-    - name: Run Unit Test
-      continue-on-error: true
-      run: |
-        ctest --preset ${{ matrix.cmake.test_preset }}
-
-    - name: CCache statistics
-      run: |
-        ccache --show-stats

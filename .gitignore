@@ -1,0 +1,29 @@
+## Ignore common dev files
+*.patch
+*.rej
+*.orig
+*.org
+*.bak
+
+## build and Python's virtual env related
+build/**
+out/**
+.venv/**
+.win64-venv/**
+
+## Windows
+desktop.ini
+Thumbs.db
+
+## OS/X
+.DS_Store
+._files
+
+## archives
+*.url
+*.7z
+*.zip
+
+## CMake user, conan presets
+CMakeUserPresets.json
+ConanCMakePresets.json

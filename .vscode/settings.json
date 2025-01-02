@@ -1,0 +1,260 @@
+{
+    // Misc/Editor
+    "editor.rulers": [
+        100
+    ],
+    // MS C++ Tools “Run Code Analysis.” 
+    "C_Cpp.default.configurationProvider": "ms-vscode.cmake-tools",
+    "C_Cpp.codeAnalysis.clangTidy.enabled": true,
+    "C_Cpp.codeAnalysis.clangTidy.useBuildPath": true,
+    "C_Cpp.codeAnalysis.clangTidy.args": [
+        " -extra-arg=-std=c++20"
+    ],
+    "C_Cpp.codeAnalysis.exclude": {
+        "*grammar_def.hpp": true
+    },
+    // CMake
+    "cmake.configureOnOpen": false,
+    "cmake.useCMakePresets": "auto",
+    "cmake.options.statusBarVisibility": "compact",
+    "cmake.options.advanced": {
+        "cpack": {
+            "statusBarVisibility": "hidden"
+        },
+        "packagePreset": {
+            "statusBarVisibility": "hidden"
+        },
+        "workflow": {
+            "statusBarVisibility": "compact"
+        }
+    },
+    // MS Python tools
+    "python.terminal.activateEnvironment": true,
+    //   see https://stackoverflow.com/questions/72322120/vscode-import-x-could-not-be-resolved-even-though-listed-under-helpmodules
+    "python.analysis.extraPaths": [
+        "~/.local/share/pipx/venvs/conan/lib/python3.12/site-packages/", // pipx
+        "${workspaceFolder}/.venv/lib/*/site-packages/",
+        "${workspaceFolder}/.win64-venv/"
+    ],
+    // Doxygen
+    "doxdocgen.c.triggerSequence": "///",
+    "doxdocgen.c.firstLine": "/// ",
+    "doxdocgen.c.commentPrefix": "/// ",
+    "doxdocgen.c.lastLine": "///",
+    // To-Do Tree
+    "todo-tree.general.tags": [
+        "BUG", "HACK", "FIXME", "TODO", "XXX",
+        "@todo", "@fixme",
+        "FixMe [C++20]", "FixMe [C++23]", "FixMe [C++26]",
+        "ToDo [C++20]",  "ToDo [C++23]",  "ToDo [C++26]",
+        "FixMe [CMake]", "ToDo [CMake]",  "@todo [CMake]",
+        "@fixme [CMake]",
+        "<<<<<<<"
+    ],
+    "todo-tree.general.tagGroups": {
+        "BUGS": [
+            "BUG", "HACK"
+        ],
+        "TODO": [
+            "FIXME", "TODO", "XXX",
+            "@todo", "@fixme"
+        ],
+        "C++20/23/26": [
+            "FixMe [C++20]", "FixMe [C++23]", "FixMe [C++26]",
+            "ToDo [C++20]",  "ToDo [C++23]",  "ToDo [C++26]",
+        ],
+        "CMake": [
+            "FixMe [CMake]", "ToDo [CMake]", "@fixme [CMake]", "@todo [CMake]"
+        ],
+        "git-conflict": [
+            "<<<<<<<"
+        ]
+    },
+    "todo-tree.filtering.excludeGlobs": [
+        "**/doxyfilter.py",
+        "**/conf.py.in"
+    ],
+    "todo-tree.tree.buttons.groupBySubTag": true,
+    "todo-tree.general.debug": true,
+    "todo-tree.general.periodicRefreshInterval": 15,
+    "todo-tree.general.automaticGitRefreshInterval": 60,
+    "todo-tree.regex.regexCaseSensitive": false,
+    // psioniq File Header
+    "psi-header.config": {
+        "license": "Custom",
+        "forceToTop": true,
+        "spacesBetweenYears": false
+    },
+    "psi-header.templates": [
+        {
+            "language": "*",
+            "template": [
+                "Copyright (c) <<projectCreationYear>>-<<year>> <<author>> (<<authoremail>>).",
+                "SPDX-License-Identifier: GPL-3.0-or-later"
+            ]
+        }
+    ],
+    "psi-header.variables": [
+        [
+            "projectCreationYear",
+            "2017"
+        ],
+        [
+            "author",
+            "Olaf"
+        ],
+        [
+            "authoremail",
+            "<ibis-hdl@users.noreply.github.com>"
+        ],
+        [
+            "spdxid",
+            "GPL-3.0-or-later"
+        ]
+    ],
+    "psi-header.lang-config": [
+        {
+            "language": "cpp",
+            "lineLength": 100,
+            "begin": "//",
+            "end": "//",
+            "prefix": "// "
+        },
+        {
+            "language": "python",
+            "lineLength": 100,
+            "begin": "",
+            "end": "",
+            "prefix": "# "
+        }
+    ],
+    "psi-header.changes-tracking": {
+        "autoHeader": "autoSave",
+        "include": [
+            "cpp",
+            "python"
+        ],
+        "exclude": [
+            "jsonc",
+            "json",
+            "markdown"
+        ],
+        "excludeGlob": [
+            "**/CMakeLists.txt",
+            "**/*.cmake",
+            "**/settings.json",
+            "*"
+        ]
+    },
+    "files.associations": {
+        "algorithm": "cpp",
+        "any": "cpp",
+        "array": "cpp",
+        "atomic": "cpp",
+        "bit": "cpp",
+        "bitset": "cpp",
+        "cctype": "cpp",
+        "cfenv": "cpp",
+        "charconv": "cpp",
+        "chrono": "cpp",
+        "clocale": "cpp",
+        "cmath": "cpp",
+        "codecvt": "cpp",
+        "compare": "cpp",
+        "complex": "cpp",
+        "concepts": "cpp",
+        "condition_variable": "cpp",
+        "coroutine": "cpp",
+        "csignal": "cpp",
+        "cstdarg": "cpp",
+        "cstddef": "cpp",
+        "cstdint": "cpp",
+        "cstdio": "cpp",
+        "cstdlib": "cpp",
+        "cstring": "cpp",
+        "ctime": "cpp",
+        "cwchar": "cpp",
+        "cwctype": "cpp",
+        "deque": "cpp",
+        "exception": "cpp",
+        "filesystem": "cpp",
+        "format": "cpp",
+        "forward_list": "cpp",
+        "fstream": "cpp",
+        "functional": "cpp",
+        "future": "cpp",
+        "initializer_list": "cpp",
+        "iomanip": "cpp",
+        "ios": "cpp",
+        "iosfwd": "cpp",
+        "iostream": "cpp",
+        "istream": "cpp",
+        "iterator": "cpp",
+        "limits": "cpp",
+        "list": "cpp",
+        "locale": "cpp",
+        "map": "cpp",
+        "memory": "cpp",
+        "memory_resource": "cpp",
+        "mutex": "cpp",
+        "new": "cpp",
+        "numbers": "cpp",
+        "numeric": "cpp",
+        "optional": "cpp",
+        "ostream": "cpp",
+        "print": "cpp",
+        "queue": "cpp",
+        "random": "cpp",
+        "ranges": "cpp",
+        "ratio": "cpp",
+        "regex": "cpp",
+        "resumable": "cpp",
+        "set": "cpp",
+        "shared_mutex": "cpp",
+        "source_location": "cpp",
+        "span": "cpp",
+        "sstream": "cpp",
+        "stdexcept": "cpp",
+        "stdfloat": "cpp",
+        "stop_token": "cpp",
+        "streambuf": "cpp",
+        "string": "cpp",
+        "string_view": "cpp",
+        "strstream": "cpp",
+        "system_error": "cpp",
+        "thread": "cpp",
+        "tuple": "cpp",
+        "type_traits": "cpp",
+        "typeindex": "cpp",
+        "typeinfo": "cpp",
+        "unordered_map": "cpp",
+        "unordered_set": "cpp",
+        "utility": "cpp",
+        "valarray": "cpp",
+        "variant": "cpp",
+        "vector": "cpp",
+        "xfacet": "cpp",
+        "xhash": "cpp",
+        "xiosbase": "cpp",
+        "xlocale": "cpp",
+        "xlocbuf": "cpp",
+        "xlocinfo": "cpp",
+        "xlocmes": "cpp",
+        "xlocmon": "cpp",
+        "xlocnum": "cpp",
+        "xloctime": "cpp",
+        "xmemory": "cpp",
+        "xstring": "cpp",
+        "xtr1common": "cpp",
+        "xtree": "cpp",
+        "xutility": "cpp",
+        "*.ipp": "cpp",
+        "*.tcc": "cpp",
+        "__bit_reference": "cpp",
+        "__node_handle": "cpp",
+        "__split_buffer": "cpp",
+        "__threading_support": "cpp",
+        "__tree": "cpp",
+        "__verbose_abort": "cpp"
+    }
+}

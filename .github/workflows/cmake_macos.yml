@@ -74,4 +74,6 @@ jobs:
 
     - name: Show linked libs
       run: |
-        ldd ${{ github.workspace }}/build/source/Release/gha-clang19
+        otool -L ${{ github.workspace }}/build/source/Release/gha-clang19
+        echo "---"
+        otool -l ${{ github.workspace }}/build/source/Release/gha-clang19

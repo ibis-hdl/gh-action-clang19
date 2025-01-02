@@ -15,7 +15,7 @@
                 "compiler-gcc",
                 "condition-linux",
                 "ninja-multi-config",
-                "cmake-default-configure-settings",
+                "cmake-pedantic-configure-settings",
                 "default-install-settings",
                 "default-environment"
             ]
@@ -28,7 +28,7 @@
                 "compiler-clang",
                 "condition-linux-or-macos",
                 "ninja-multi-config",
-                "cmake-default-configure-settings",
+                "cmake-pedantic-configure-settings",
                 "default-install-settings",
                 "default-environment"
             ]
@@ -41,7 +41,7 @@
                 "compiler-clang-libc++",
                 "condition-linux-or-macos",
                 "ninja-multi-config",
-                "cmake-default-configure-settings",
+                "cmake-pedantic-configure-settings",
                 "default-install-settings",
                 "default-environment"
             ]
@@ -55,7 +55,7 @@
                 "condition-windows",
                 "windows-x64-arch",
                 "ninja-multi-config",
-                "cmake-default-configure-settings",
+                "cmake-pedantic-configure-settings",
                 "default-install-settings",
                 "default-environment"
             ]

@@ -72,3 +72,7 @@ jobs:
     - name: CMake build
       run: |
         cmake --build --preset ${{ matrix.cmake.build_preset }}
+
+    - name: Show linked libs
+      run: |
+        ldd ${{ github.workspace }}/build/Release/gha-clang19

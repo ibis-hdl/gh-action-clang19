@@ -23,7 +23,7 @@
                 "cmake-default-policies"
             ],
             "cacheVariables": {
-                "CMAKE_VERBOSE_MAKEFILE": "ON"
+                "CMAKE_VERBOSE_MAKEFILE": "OFF"
             }
         },
         {
@@ -114,14 +114,6 @@
             }
         },
         {
-            "name": "clang-tidy",
-            "description": "CMake Clang-Tidy build target",
-            "hidden": true,
-            "cacheVariables": {
-                "CMAKE_CXX_CLANG_TIDY": "clang-tidy"
-            }
-        },
-        {
             "name": "default-install-settings",
             "description": "Default build and install directories",
             "hidden": true,
@@ -136,33 +128,47 @@
             "environment": {}
         },
         {
-            "name": "default-compiler-cache-settings",
-            "hidden": true,
-            "environment": {
-                "CCACHE_BASEDIR": "${sourceDir}",
-                "CCACHE_SLOPPINESS": "pch_defines,time_macros"
-            }
-        },
-        {
             "name": "ccache",
-            "description": "Ccache compiler cache.",
+            "description": "ccache - compiler cache",
             "hidden": true,
-            "inherits": [
-                "default-compiler-cache-settings"
-            ],
             "cacheVariables": {
-                "CMAKE_CXX_COMPILER_LAUNCHER": "sccache"
+                "CMAKE_CXX_COMPILER_LAUNCHER": "ccache",
+                "CCACHE_BASEDIR": "${sourceDir}",
+                "CCACHE_SLOPPINESS": "pch_defines,time_macros",
+                "CCACHE_DIR": "~/.cache/ccache" 
             }
         },
         {
             "name": "sccache",
-            "description": "Mozilla's sccache ccache-like tool.",
+            "description": "sccache - Mozilla's ccache-like tool",
             "hidden": true,
-            "inherits": [
-                "default-compiler-cache-settings"
-            ],
             "cacheVariables": {
                 "CMAKE_CXX_COMPILER_LAUNCHER": "sccache"
+            }
+        },
+        {
+            "name": "tool-clang-tidy",
+            "description": "CMake Clang-Tidy build target",
+            "hidden": true,
+            "cacheVariables": {
+                "CMAKE_CXX_CLANG_TIDY": "clang-tidy;--format-style=file;-p=${sourceDir}/build"
+            }
+        },
+        {
+            "name": "tool-iwyu",
+            "description": "CMake Clang based Include-What-You-Use (IWYU)",
+            "hidden": true,
+            "cacheVariables": {
+                "CMAKE_CXX_INCLUDE_WHAT_YOU_USE": "iwyu;-Xiwyu;--mapping_file=${sourceDir}/cmake/utils/iwyu/project.imp;-Xiwyu;--no_comments;-Xiwyu;--max_line_length=160;-Xiwyu;--transitive_includes_only;-Xiwyu;--quoted_includes_first;-Xiwyu;--cxx17ns"
+            }
+        },
+        {
+            "name": "iwyu-windows",
+            "description": "CMake Clang based Include-What-You-Use",
+            "hidden": true,
+            "inherits": [ "condition-windows" ],
+            "cacheVariables": {
+                "CXX_INCLUDE_WHAT_YOU_USE": "iwyu;--driver-mode=cl"
             }
         }
     ],

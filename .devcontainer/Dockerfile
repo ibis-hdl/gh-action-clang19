@@ -31,3 +31,4 @@ RUN export DEBIAN_FRONTEND=noninteractive \
 # clang-19 lldb-19 lld-19 clang-tools-19 clang-format-19 clang-tidy-19 libc++-19-dev 
 # $ wget https://apt.llvm.org/llvm.sh -O - | sudo bash -s -- 19 all 
 #    PKG="$PKG clang-tidy-19 clang-format-19 clang-tools-19 llvm-19-dev lld-19 lldb-19 llvm-19-tools libomp-19-dev libc++-19-dev libc++abi-19-dev libclang-common-19-dev libclang-19-dev libclang-cpp19-dev libunwind-19-dev"
+# https://askubuntu.com/questions/1286131/how-do-i-install-llvm-10-on-ubuntu-18-04'

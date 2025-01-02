@@ -62,8 +62,8 @@ jobs:
         # which clang++-19
         echo "------ cat 1 -----"
         ls -la /opt/homebrew/etc/clang
-        echo "------ cat 2 -----"
-        ls -la ~/.config/clang
+        cat cat /opt/homebrew/etc/clang/arm64-apple-darwin15.cfg
+        # There is no ~/.config/clang
         echo "----- cat 3 ------"
         cat /opt/homebrew/etc/clang/arm64-apple-darwin24.cfg
 

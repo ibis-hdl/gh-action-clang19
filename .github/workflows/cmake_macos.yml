@@ -76,4 +76,3 @@ jobs:
       run: |
         otool -L ${{ github.workspace }}/build/source/Release/gha-clang19
         echo "---"
-        otool -l ${{ github.workspace }}/build/source/Release/gha-clang19

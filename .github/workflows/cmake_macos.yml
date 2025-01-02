@@ -40,7 +40,7 @@ jobs:
       # https://github.com/actions/runner-images/blob/main/images/macos/macos-15-Readme.md
       run: |
         brew update
-        brew install ninja llvm@19 lld@19
+        brew install ninja llvm@19 lld lldb
         # set the path to homebrew's LLVM
         echo "$(brew --prefix llvm@19)/bin" >> $GITHUB_PATH
 

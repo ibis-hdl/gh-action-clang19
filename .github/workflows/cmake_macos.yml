@@ -71,6 +71,8 @@ jobs:
 
     - name: CMake configuration
       run: |
+        clang++ --version
+        cmake --version
         cmake --list-presets
         cmake --preset ${{ matrix.cmake.configure_preset }}
 

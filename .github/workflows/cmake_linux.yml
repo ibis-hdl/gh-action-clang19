@@ -58,7 +58,11 @@ jobs:
     - name: Set Github runner's env (CXX=${{ matrix.cmake.cxx }})
       run: |
         echo "CXX=${{ matrix.cmake.cxx }}" >> $GITHUB_ENV
+
+    - name: Check prerequisites
+      run: |
         eval ${CXX} --version
+        cmake --version
     
     - name: CMake configuration
       run: |

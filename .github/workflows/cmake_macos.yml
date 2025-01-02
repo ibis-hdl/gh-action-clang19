@@ -52,16 +52,19 @@ jobs:
     - name: Set Github runner's env (CXX=${{ matrix.cmake.cxx }})
       run: |
         echo "CXX=${{ matrix.cmake.cxx }}" >> $GITHUB_ENV
-        eval ${CXX} --version
+
+    - name: Check prerequisites
+      run: |
         echo "$ cat /opt/homebrew/etc/clang/arm64-apple-darwin24.cfg:"
         echo "--------------------------------------------------------"
         cat /opt/homebrew/etc/clang/arm64-apple-darwin24.cfg
         echo "--------------------------------------------------------"
         # There is no ~/.config/clang
+        eval ${CXX} --version
+        cmake --version
 
     - name: CMake configuration
       run: |
-        cmake --version
         cmake --list-presets
         cmake --preset ${{ matrix.cmake.configure_preset }}
 

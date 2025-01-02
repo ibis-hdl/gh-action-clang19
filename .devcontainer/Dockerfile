@@ -25,6 +25,9 @@ RUN export DEBIAN_FRONTEND=noninteractive \
        iwyu \
     && apt-get autoremove -y && apt-get clean -y && rm -rf /var/lib/apt/lists/*
 
-# Problem working on ...
-#     && add-apt-repository -y 'deb http://apt.llvm.org/noble/   noble-llvm-toolchain-19  main' \
-# clang-tools-19 clang-format-19 clang-tidy-19 libc++-19-dev 
+# Problem working on, see https://github.com/llvm/llvm-project/issues/121496
+#     wget -O - https://apt.llvm.org/llvm-snapshot.gpg.key | sudo apt-key add - \
+#     && add-apt-repository -y 'deb http://apt.llvm.org/noble/ llvm-toolchain-noble-19 main' \
+# clang-19 lldb-19 lld-19 clang-tools-19 clang-format-19 clang-tidy-19 libc++-19-dev 
+# $ wget https://apt.llvm.org/llvm.sh -O - | sudo bash -s -- 19 all 
+#    PKG="$PKG clang-tidy-19 clang-format-19 clang-tools-19 llvm-19-dev lld-19 lldb-19 llvm-19-tools libomp-19-dev libc++-19-dev libc++abi-19-dev libclang-common-19-dev libclang-19-dev libclang-cpp19-dev libunwind-19-dev"

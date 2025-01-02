@@ -52,19 +52,20 @@ jobs:
     - name: Set Github runner's env (CXX=${{ matrix.cmake.cxx }})
       run: |
         echo "CXX=${{ matrix.cmake.cxx }}" >> $GITHUB_ENV
-        echo "-----------"
+        echo "---- clang version -------"
         clang --version
-        echo "-----------"
+        echo "-----clang-19 version ------"
         clang-19 --version
-        echo "-----------"
+        echo "----- which clang ------"
         which clang-19
-        echo "-----------"
-        which clang++-19
-        echo "-----------"
+        echo "----- which clang++ ------"
+        # which clang++-19
+        echo "------ cat 1 -----"
         cat /opt/homebrew/etc/clang
-        echo "-----------"
+        echo "------ cat 2 -----"
         cat ~/.config/clang
-        echo "-----------"
+        echo "----- cat 3 ------"
+        cat /opt/homebrew/etc/clang/arm64-apple-darwin24.cfg
 
     - name: CMake configuration
       run: |

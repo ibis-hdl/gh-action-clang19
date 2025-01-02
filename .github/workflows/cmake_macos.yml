@@ -49,9 +49,7 @@ jobs:
         echo "CXX=${{ matrix.cmake.cxx }}" >> $GITHUB_ENV
 
     - name: CMake configuration
-      env:
       run: |
-        conan list '*'
         cmake --list-presets
         cmake --preset ${{ matrix.cmake.configure_preset }}
 

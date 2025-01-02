@@ -38,7 +38,7 @@
             "displayName": "Clang-libc++",
             "description": "Clang-libc++ compiler",
             "inherits": [
-                "condition-linux",
+                "condition-linux-or-macos",
                 "ninja-multi-config",
                 "clang-libc++-release-build-type",
                 "cmake-default-configure-settings",

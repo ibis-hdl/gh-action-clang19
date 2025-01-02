@@ -20,9 +20,14 @@ jobs:
         os:       [ macos ]
         cmake:
         - {
-            cx:                 "clang++",
+            cxx:                "clang++",
             configure_preset:   "clang",
             build_preset:       "clang-release"
+          }
+        - {
+            cxx:                "clang++",
+            configure_preset:   "clang-libc++",
+            build_preset:       "clang-libc++-release"
           }
 
     steps:
@@ -35,7 +40,7 @@ jobs:
       # https://github.com/actions/runner-images/blob/main/images/macos/macos-15-Readme.md
       run: |
         brew update
-        brew install ninja pipx llvm@19
+        brew install ninja llvm@19 lld@19
         # set the path to homebrew's LLVM
         echo "$(brew --prefix llvm@19)/bin" >> $GITHUB_PATH
 
@@ -47,6 +52,9 @@ jobs:
     - name: Set Github runner's env (CXX=${{ matrix.cmake.cxx }})
       run: |
         echo "CXX=${{ matrix.cmake.cxx }}" >> $GITHUB_ENV
+        clang --version
+        clang-19 --version
+        which clang-19
 
     - name: CMake configuration
       run: |

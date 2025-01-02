@@ -47,6 +47,7 @@ jobs:
         echo "CXX=${{ matrix.cmake.cxx }}" >> $GITHUB_ENV
 
     - name: CMake configuration
+      shell: cmd
       run: |
         call "${{ matrix.cmake.vcvars }}"
         cmake --list-presets

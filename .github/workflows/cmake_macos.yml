@@ -61,9 +61,9 @@ jobs:
         echo "----- which clang++ ------"
         # which clang++-19
         echo "------ cat 1 -----"
-        cat /opt/homebrew/etc/clang
+        ls -la /opt/homebrew/etc/clang
         echo "------ cat 2 -----"
-        cat ~/.config/clang
+        ls -la ~/.config/clang
         echo "----- cat 3 ------"
         cat /opt/homebrew/etc/clang/arm64-apple-darwin24.cfg
 

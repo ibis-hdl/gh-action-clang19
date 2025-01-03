@@ -56,7 +56,6 @@ jobs:
     - name: clang config
       run: |
         {
-          echo "# ~/.config/clang"
           echo "# See note on brew install llvm@19"
           echo "-I/opt/homebrew/opt/llvm/include"
           echo "-L/opt/homebrew/opt/llvm/lib/c++"
@@ -65,16 +64,16 @@ jobs:
 
     - name: Check prerequisites
       run: |
-        echo "$ cat /opt/homebrew/etc/clang/arm64-apple-darwin24.cfg:"
+        echo "$ cat /opt/homebrew/etc/clang/arm64-apple-darwin24.cfg"
         echo "--------------------------------------------------------"
         cat /opt/homebrew/etc/clang/arm64-apple-darwin24.cfg
         echo "--------------------------------------------------------"
-        # There is no ~/.config/clang
-        eval ${CXX} --version
-        cmake --version
+        echo "$ ~/.config/clang"
         echo "--------------------------------------------------------"
         cat ~/.config/clang
         echo "--------------------------------------------------------"
+        eval ${CXX} --version
+        cmake --version
 
     - name: CMake configuration
       run: |
@@ -88,4 +87,3 @@ jobs:
     - name: Show linked libs
       run: |
         otool -L ${{ github.workspace }}/build/source/Release/gha-clang19
-        echo "---"

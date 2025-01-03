@@ -53,12 +53,14 @@ jobs:
       run: |
         echo "CXX=${{ matrix.cmake.cxx }}" >> $GITHUB_ENV
 
-    -name: clang config
+    - name: clang config
       run: |
         {
-          echo # ~/.config/clang
-          echo -L/opt/homebrew/opt/llvm/lib/c++
-          echo -L/opt/homebrew/opt/llvm/lib/unwind -lunwind
+          echo "# ~/.config/clang"
+          echo "# See note on brew install llvm@19"
+          echo "-I/opt/homebrew/opt/llvm/include"
+          echo "-L/opt/homebrew/opt/llvm/lib/c++"
+          echo "-L/opt/homebrew/opt/llvm/lib/unwind -lunwind"
         } > ~/.config/clang
 
     - name: Check prerequisites

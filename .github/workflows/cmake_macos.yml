@@ -53,7 +53,7 @@ jobs:
       run: |
         echo "CXX=${{ matrix.cmake.cxx }}" >> $GITHUB_ENV
 
-    - name: clang config
+    - name: Write Clang user config
       run: |
         {
           echo "# See note on brew install llvm@19"
@@ -77,7 +77,6 @@ jobs:
 
     - name: CMake configuration
       run: |
-        cmake --list-presets
         cmake --preset ${{ matrix.cmake.configure_preset }}
 
     - name: CMake build

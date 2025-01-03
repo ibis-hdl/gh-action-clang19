@@ -53,6 +53,14 @@ jobs:
       run: |
         echo "CXX=${{ matrix.cmake.cxx }}" >> $GITHUB_ENV
 
+    -name: clang config
+      run: |
+        {
+        # ~/.config/clang
+        -L/opt/homebrew/opt/llvm/lib/c++ 
+        -L/opt/homebrew/opt/llvm/lib/unwind -lunwind"
+        } > ~/.config/clang
+
     - name: Check prerequisites
       run: |
         echo "$ cat /opt/homebrew/etc/clang/arm64-apple-darwin24.cfg:"
@@ -62,6 +70,9 @@ jobs:
         # There is no ~/.config/clang
         eval ${CXX} --version
         cmake --version
+        echo "--------------------------------------------------------"
+        cat ~/.config/clang
+        echo "--------------------------------------------------------"
 
     - name: CMake configuration
       run: |

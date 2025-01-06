@@ -6,6 +6,11 @@
 #include <iostream>
 #include <cstdint>
 
+//
+// clang-18 has problems with format's call to consteval function, see
+// https://godbolt.org/z/W814sKExr
+//
+
 struct foo_literal {
     enum class specifier_type : std::uint8_t { unspecified, A, B, C };
 
@@ -47,17 +52,30 @@ struct std::formatter<foo_literal> : std::formatter<std::string_view> {
     }
 };
 
-void print(std::ostream &os, std::string_view name) {
-  os << std::format("Hello {0}!\n", name);
+void print(std::ostream& os, std::string_view name) { os << std::format("Hello {0}!\n", name); }
+
+std::string_view library_info()
+{
+#if (_LIBCPP_VERSION)
+    return std::format("LibC++ {}", _LIBCPP_VERSION);
+#elif (__GLIBCXX__)
+    return std::format("GlibC++ {}", __GLIBCXX__);
+#elif (_MSC_VER)
+    return std::format("MSVC C++ {}", _MSC_VER);
+#else
+    constexpr std::string_view const na{ "Unknown" };
+    return std::format("{}", na);
+#endif
 }
 
-int main() 
+int main()
 {
-  print(std::cout, "World");
+    print(std::cout, "World");
 
-  // clang-18 has problems with it, see https://godbolt.org/z/W814sKExr
-  foo_literal literal{ "Hello", foo_literal::specifier_type::A };
-  std::cout << std::format("{: ^10}\n", literal);
+    foo_literal literal{ "Hello", foo_literal::specifier_type::A };
+    std::cout << std::format("{: ^10}\n", literal);
 
-  return 0;
+    print(std::cout, std::format("... from {}", library_info()));
+
+    return 0;
 }

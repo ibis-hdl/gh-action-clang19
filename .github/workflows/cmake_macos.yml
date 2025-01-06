@@ -64,12 +64,13 @@ jobs:
 
     - name: Check prerequisites
       run: |
-        echo "$ cat /opt/homebrew/etc/clang/arm64-apple-darwin24.cfg"
-        echo "--------------------------------------------------------"
+        echo "------------- brew config` and `brew doctor ------------"
+        brew config
+        echo "---"
+        brew doctor
+        echo "--- /opt/homebrew/etc/clang/arm64-apple-darwin24.cfg ---"
         cat /opt/homebrew/etc/clang/arm64-apple-darwin24.cfg
-        echo "--------------------------------------------------------"
-        echo "$ cat ~/.config/clang"
-        echo "--------------------------------------------------------"
+        echo "------------------ ~/.config/clang -----------------------"
         cat ~/.config/clang
         echo "--------------------------------------------------------"
         eval ${CXX} --version

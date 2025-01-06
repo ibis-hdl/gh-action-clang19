@@ -7,10 +7,7 @@
         {
             "name": "cmake-default-policies",
             "description": "Set CMake policies",
-            "hidden": true,
-            "cacheVariables": {
-                "CMAKE_POLICY_DEFAULT_CMP0167": "NEW"
-            }
+            "hidden": true
         },
         {
             "name": "cmake-default-configure-settings",

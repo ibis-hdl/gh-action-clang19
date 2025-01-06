@@ -58,3 +58,7 @@ jobs:
       run: |
         call "${{ matrix.cmake.vcvars }}"
         cmake --build --preset ${{ matrix.cmake.build_preset }}
+        
+    - name: Run the build
+      run: |
+        ${{ github.workspace }}/build/source/Release/gha-clang19

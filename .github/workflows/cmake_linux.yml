@@ -76,3 +76,7 @@ jobs:
     - name: Show linked libs
       run: |
         ldd ${{ github.workspace }}/build/source/Release/gha-clang19
+        
+    - name: Run the build
+      run: |
+        ${{ github.workspace }}/build/source/Release/gha-clang19

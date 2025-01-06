@@ -43,10 +43,13 @@ jobs:
         # brew doctor shows ...
         # - unnecessary local {Cask, Core} taps
         # - also deprecated:  openssl@1.1
-        echo "### fix 'brew doctor' issues"
-        brew bundle cleanup --force
+        echo "### fix 'brew doctor' issues #1 (untap)"
+        brew untap homebrew/cask
+        brew untap homebrew/core
         # ... afterwards, now we are ready to install hopefully
-        #brew update
+        echo "### fix 'brew doctor' issues #2 (upgrade)"
+        brew upgrade
+        echo "### install ..."
         brew install ninja llvm@19
         # set the path to homebrew's LLVM
         echo "$(brew --prefix llvm@19)/bin" >> $GITHUB_PATH

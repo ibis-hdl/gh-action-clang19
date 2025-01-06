@@ -49,9 +49,10 @@ jobs:
         # ... afterwards, now we are ready to install hopefully
         echo "### fix 'brew doctor' issues #2 (openssl@1)"
         brew uninstall openssl@1.1
+        rm -rf /opt/homebrew/etc/openssl@1.1
         brew cleanup
         brew install openssl@3.0
-        echo "### install ..."
+        echo "### install tools ..."
         brew install ninja llvm@19
         # set the path to homebrew's LLVM
         echo "$(brew --prefix llvm@19)/bin" >> $GITHUB_PATH

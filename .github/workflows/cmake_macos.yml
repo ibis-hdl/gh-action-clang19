@@ -47,8 +47,9 @@ jobs:
         brew untap homebrew/cask
         brew untap homebrew/core
         # ... afterwards, now we are ready to install hopefully
-        echo "### fix 'brew doctor' issues #2 (upgrade)"
-        brew upgrade
+        echo "### fix 'brew doctor' issues #2 (upgrade openssl@3.0)"
+        #brew upgrade
+        brew install openssl@3.0
         echo "### install ..."
         brew install ninja llvm@19
         # set the path to homebrew's LLVM

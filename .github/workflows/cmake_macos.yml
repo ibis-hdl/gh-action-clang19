@@ -44,7 +44,8 @@ jobs:
         # - unnecessary local {Cask, Core} taps
         # - also deprecated:  openssl@1.1
         echo "### fix 'brew doctor' issues"
-        brew bundle cleanup --force
+        brew untap homebrew/cask
+        brew untap homebrew/core
         # ... afterwards, now we are ready to install hopefully
         #brew update
         brew install ninja llvm@19

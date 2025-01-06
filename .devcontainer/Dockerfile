@@ -22,6 +22,7 @@ RUN export DEBIAN_FRONTEND=noninteractive \
     && apt-get install -y --no-install-recommends \
        software-properties-common \
     && apt-get install -y --no-install-recommends \
+       libc++-dev clang-tools clang-format clang-tidy \
        iwyu \
     && apt-get autoremove -y && apt-get clean -y && rm -rf /var/lib/apt/lists/*
 

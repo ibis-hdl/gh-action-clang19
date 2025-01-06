@@ -2,6 +2,7 @@
 // SPDX-License-Identifier: GPL-3.0-only
 
 #include <string_view>
+#include <string>
 #include <format>
 #include <iostream>
 #include <cstdint>
@@ -54,12 +55,12 @@ struct std::formatter<foo_literal> : std::formatter<std::string_view> {
 
 void print(std::ostream& os, std::string_view name) { os << std::format("Hello {0}!\n", name); }
 
-std::string_view library_info()
+std::string library_info()
 {
 #if (_LIBCPP_VERSION)
-    return std::format("LibC++ {}", _LIBCPP_VERSION);
+    return std::format("LibC++ {:d}", _LIBCPP_VERSION);
 #elif (__GLIBCXX__)
-    return std::format("GlibC++ {}", __GLIBCXX__);
+    return std::format("GlibC++ {:d}", __GLIBCXX__);
 #elif (_MSC_VER)
     return std::format("MSVC C++ {}", _MSC_VER);
 #else
@@ -75,7 +76,7 @@ int main()
     foo_literal literal{ "Hello", foo_literal::specifier_type::A };
     std::cout << std::format("{: ^10}\n", literal);
 
-    print(std::cout, std::format("... from {}", library_info()));
+    print(std::cout, std::format("... from {}\n", library_info()));
 
     return 0;
 }

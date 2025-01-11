@@ -39,7 +39,7 @@
             "description": "Clang-libc++ compiler",
             "inherits": [
                 "compiler-clang-libc++",
-                "condition-linux-or-macos",
+                "condition-linux",
                 "ninja-multi-config",
                 "cmake-pedantic-configure-settings",
                 "default-install-settings",

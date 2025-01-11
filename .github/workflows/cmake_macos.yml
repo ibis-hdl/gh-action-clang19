@@ -24,11 +24,6 @@ jobs:
             configure_preset:   "clang",
             build_preset:       "clang-release"
           }
-        - {
-            cxx:                "clang++",
-            configure_preset:   "clang-libc++",
-            build_preset:       "clang-libc++-release"
-          }
 
     steps:
 
@@ -71,6 +66,7 @@ jobs:
         mkdir -p ~/.config/clang/
         {
           echo "# See note on brew install llvm@19"
+          echo "# See https://clang.llvm.org/docs/UsersManual.html#configuration-files"
           echo "-I/opt/homebrew/opt/llvm/include"
           echo "-L/opt/homebrew/opt/llvm/lib/c++"
           echo "-L/opt/homebrew/opt/llvm/lib/unwind -lunwind"

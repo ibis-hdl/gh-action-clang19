@@ -68,12 +68,13 @@ jobs:
 
     - name: Write Clang user config
       run: |
+        mkdir -p ~/.config/clang/
         {
           echo "# See note on brew install llvm@19"
           echo "-I/opt/homebrew/opt/llvm/include"
           echo "-L/opt/homebrew/opt/llvm/lib/c++"
           echo "-L/opt/homebrew/opt/llvm/lib/unwind -lunwind"
-        } > ~/.config/clang
+        } > ~/.config/clang/clang++.cfg
 
     - name: Check prerequisites
       run: |
@@ -83,8 +84,8 @@ jobs:
         brew doctor
         echo "--- /opt/homebrew/etc/clang/arm64-apple-darwin24.cfg ---"
         cat /opt/homebrew/etc/clang/arm64-apple-darwin24.cfg
-        echo "------------------ ~/.config/clang -----------------------"
-        cat ~/.config/clang
+        echo "------------- ~/.config/clang/clang++.cfg --------------"
+        cat ~/.config/clang/clang++.cfg
         echo "--------------------------------------------------------"
         eval ${CXX} --version
         cmake --version
